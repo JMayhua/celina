@@ -1,0 +1,75 @@
+.text-overlay {
+    position: absolute;
+    top: 30%; /* Ajusta según desees */
+    left: 10%; /* Cambia a un valor menor para mover a la izquierda */
+    transform: translateX(0); /* Elimina el translate para que se alinee a la izquierda */
+    text-align: left; /* Alineación a la izquierda */
+    color: #FFD700; /* Color dorado */
+    font-size: 3rem;
+    font-family: 'Arial', sans-serif; /* O cualquier otra fuente que prefieras */
+    text-shadow: 2px 2px 5px rgba(248, 247, 247, 0.5); /* Sombra para mejorar la legibilidad */
+    animation: fadeIn 3s ease-in-out infinite alternate; /* Animación */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .text-overlay {
+        top: 20%; /* Ajusta la posición vertical en dispositivos móviles */
+        left: 5%; /* Cambia la posición horizontal en dispositivos móviles */
+        font-size: 2rem; /* Disminuye el tamaño de fuente */
+    }
+}
+
+@media (max-width: 480px) {
+    .text-overlay {
+        top: 15%; /* Ajusta aún más en pantallas pequeñas */
+        left: 2%; /* Cambia la posición horizontal en pantallas pequeñas */
+        font-size: 1.5rem; /* Tamaño de fuente más pequeño */
+    }
+}
+
+/* Imagen*/.image-container {
+    position: absolute;
+    top: 50%;
+    right: 10%; /* Ajusta según necesites */
+    transform: translateY(-50%);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+    border-radius: 15px; /* Bordes más redondeados */
+    transition: transform 0.3s ease; /* Suaviza el movimiento al pasar el ratón */
+}
+
+.image-container:hover {
+    transform: translateY(-50%) scale(1.05); /* Aumenta un poco al pasar el ratón */
+}
+
+.animated-image {
+    width: 250px; /* Ajusta el tamaño según lo necesites */
+    border-radius: 15px; /* Bordes redondeados */
+    opacity: 0; /* Comienza invisible */
+    animation: slideIn 1s forwards, scaleIn 1s forwards; /* Animaciones combinadas */
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(50px) rotate(15deg); /* Empieza a la derecha y ligeramente rotada */
+        opacity: 0; /* Invisible al inicio */
+    }
+    100% {
+        transform: translateX(0) rotate(0); /* Regresa a su posición original y sin rotación */
+        opacity: 1; /* Se vuelve visible */
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8); /* Comienza un poco más pequeña */
+    }
+    100% {
+        transform: scale(1); /* Escala a su tamaño original */
+    }
+}

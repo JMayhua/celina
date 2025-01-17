@@ -1,0 +1,102 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    overflow-x: hidden;
+    color: white;
+    background-color: #000; /* Fondo oscuro para que resalten las estrellas */
+}
+
+header {
+    background: rgba(214, 114, 114, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1;
+    position: relative;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    z-index: 1;
+    position: relative;
+}
+
+.image {
+    width: 150px;
+    height: auto;
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.message {
+    background: rgba(214, 114, 114, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    position: relative;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+.back-button a {
+    text-decoration: none;
+    color: white;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #777;
+    z-index: 1;
+    position: relative;
+}
+
+/* Animación de estrellas */
+.stars, .twinkling {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.stars {
+    background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    animation: moveStars 200s linear infinite;
+}
+
+@keyframes moveStars {
+    from {background-position: 0 0;}
+    to {background-position: 10000px 10000px;}
+}
+
+.twinkling {
+    background: transparent url('https://www.transparenttextures.com/patterns/tiny-grid.png') repeat;
+    animation: twinkle 3s linear infinite;
+    opacity: 0.4;
+}
+
+@keyframes twinkle {
+    0%, 100% {opacity: 0.3;}
+    50% {opacity: 0.5;}
+}

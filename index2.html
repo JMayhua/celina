@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas - Un Mensaje de Amor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        :root {
+            --color-bg: linear-gradient(45deg, #00d4ff, #000, #ff0000);
+            --line-color: linear-gradient(to left top, #82ff86 20%, #144425, #104e1c);
+            --flower-center: radial-gradient(circle, #000, #ff5e00);
+            --leaf-color: radial-gradient(circle, #82ff86, #104e1c);
+            --petal-color: radial-gradient(circle, #ff0000, #ff0015e0);
+        }
+
+        body {
+            background-image: var(--color-bg);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+            animation: bgAnimation 15s ease infinite;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 50px;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.05) rotateX(10deg);
+        }
+
+        .image-container {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 5px solid rgba(255,215,0,0.5);
+        }
+
+        .image-container:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.9);
+        }
+
+        .animated-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .text-overlay {
+            color: #FFD700;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .flowers-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .sunflower {
+            position: relative;
+            width: 100px;
+            height: 200px;
+            margin: 0 10px;
+            animation: flower-sway 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes flower-sway {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        .flower_wrapper {
+            position: absolute;
+            left: 50%;
+            bottom: 2vmin;
+            animation: moving-flower-1 4s linear infinite;
+        }
+
+        .flower_stem {
+            width: 2vmin;
+            height: 65vmin;
+            background-image: var(--line-color);
+            border-radius: 4vmin;
+        }
+
+        .flower_center {
+            position: absolute;
+            top: 0vmin;
+            left: 50%;
+            z-index: 5;
+            transform: translateX(-50%) rotate(-10deg);
+            width: 20vmin;
+            height: 20vmin;
+            border-radius: 50%;
+            background: var(--flower-center);
+            animation: open-flower-middle 2s 0.4s backwards;
+        }
+
+        .flower_petal {
+            position: absolute;
+            left: 50%;
+            z-index: 3;
+            bottom: 55vmin;
+            transform: translateX(-50%);
+            width: 7vmin;
+            height: 20vmin;
+            background: var(--petal-color);
+            clip-path: ellipse(50% 50% at 50% 50%);
+            transform-origin: center bottom;
+            animation: open-flower 2s 1s backwards;
+        }
+
+        .flower_petal-1 {
+            border-radius: 50% 50% 50% / 80% 80% 20% 20%;
+            background: var(--petal-color);
+            animation: open-flower 1.4s 1s backwards;
+        }
+        .flower_petal-2 { transform: translateX(-50%) rotate(-30deg); }
+        .flower_petal-3 { transform: translateX(-50%) rotate(-60deg); }
+        .flower_petal-4 { transform: translateX(-50%) rotate(-90deg); }
+        .flower_petal-5 { transform: translateX(-50%) rotate(-120deg); }
+        .flower_petal-6 { transform: translateX(-50%) rotate(-150deg); }
+        .flower_petal-7 { transform: translateX(-50%) rotate(30deg); }
+        .flower_petal-8 { transform: translateX(-50%) rotate(60deg); }
+        .flower_petal-9 { transform: translateX(-50%) rotate(90deg); }
+        .flower_petal-10 { transform: translateX(-50%) rotate(120deg); }
+        .flower_petal-11 { transform: translateX(-50%) rotate(150deg); }
+        .flower_petal-12 { transform: translateX(-50%) rotate(180deg); }
+
+        .flower_leaf {
+            position: absolute;
+            left: 60%;
+            bottom: 18vmin;
+            transform: translateX(-45%) rotate(80deg);
+            width: 7vmin;
+            height: 17vmin;
+            background: var(--leaf-color);
+            clip-path: none;
+            border-radius: 10vmin 2vmin 10vmin 2vmin;
+            transform-origin: center bottom;
+        }
+
+        .flower_leaf-1 {
+            bottom: 18vmin;
+            transform: translateX(-45%) rotate(80deg);
+        }
+
+        .flower_leaf-2 {
+            bottom: 23vmin;
+            transform: translateX(-55%) rotate(-80deg);
+        }
+
+        @keyframes open-flower {
+            0% { transform: translateX(-50%) rotate(0); }
+        }
+
+        @keyframes open-flower-middle {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0);
+            }
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 12px 24px;
+            background-color: rgba(255,215,0,0.8);
+            color: black;
+            text-decoration: none;
+            border-radius: 25px;
+            z-index: 20;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background-color: #FFD700;
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin-bottom: 30px;
+            }
+
+            .image-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .text-overlay {
+                font-size: 2rem;
+            }
+
+            .flowers-container {
+                scale: 0.7;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin-bottom: 20px;
+            }
+
+            .image-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .text-overlay {
+                font-size: 1.5rem;
+            }
+
+            .flowers-container {
+                scale: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="musica1" autoplay loop>
+        <source src="Flores Amarillas2.mp3" type="audio/mpeg">
+        <source src="Flores Amarillas2.ogv" type="audio">
+    </audio>
+
+    <div class="container">
+       <h3 style="color: white; text-align: center; margin-bottom: 20px;">TOCA LA IMAGEN</h3>
+
+        <div class="image-container" onclick="showHeartMessage()">
+            <img src="gati.jpg" alt="Imagen especial" class="animated-image">
+        </div>
+
+        <div class="text-overlay">
+            <h1>Para ti, <br>Celina</h1><br><br><br><br>
+        </div>
+    </div>
+
+    <div class="flowers-container">
+        <div class="sunflower">
+            <div class="flower_wrapper">
+                <div class="flower_stem"></div>
+                <div class="flower_center"></div>
+                <div class="flower_petal flower_petal-1"></div>
+                <div class="flower_petal flower_petal-2"></div>
+                <div class="flower_petal flower_petal-3"></div>
+                <div class="flower_petal flower_petal-4"></div>
+                <div class="flower_petal flower_petal-5"></div>
+                <div class="flower_petal flower_petal-6"></div>
+                <div class="flower_petal flower_petal-7"></div>
+                <div class="flower_petal flower_petal-8"></div>
+                <div class="flower_petal flower_petal-9"></div>
+                <div class="flower_petal flower_petal-10"></div>
+                <div class="flower_petal flower_petal-11"></div>
+                <div class="flower_petal flower_petal-12"></div>
+                <div class="flower_leaf flower_leaf-1"></div>
+                <div class="flower_leaf flower_leaf-2"></div>
+            </div>
+        </div>
+
+        <div class="sunflower" style="transform: translateX(-50px);">
+            <div class="flower_wrapper">
+                <div class="flower_stem"></div>
+                <div class="flower_center"></div>
+                <div class="flower_petal flower_petal-1"></div>
+                <div class="flower_petal flower_petal-2"></div>
+                <div class="flower_petal flower_petal-3"></div>
+                <div class="flower_petal flower_petal-4"></div>
+                <div class="flower_petal flower_petal-5"></div>
+                <div class="flower_petal flower_petal-6"></div>
+                <div class="flower_petal flower_petal-7"></div>
+                <div class="flower_petal flower_petal-8"></div>
+                <div class="flower_petal flower_petal-9"></div>
+                <div class="flower_petal flower_petal-10"></div>
+                <div class="flower_petal flower_petal-11"></div>
+                <div class="flower_petal flower_petal-12"></div>
+                <div class="flower_leaf flower_leaf-1"></div>
+                <div class="flower_leaf flower_leaf-2"></div>
+            </div>
+        </div>
+
+        <div class="sunflower" style="transform: translateX(50px);">
+            <div class="flower_wrapper">
+                <div class="flower_stem"></div>
+                <div class="flower_center"></div>
+                <div class="flower_petal flower_petal-1"></div>
+                <div class="flower_petal flower_petal-2"></div>
+                <div class="flower_petal flower_petal-3"></div>
+                <div class="flower_petal flower_petal-4"></div>
+                <div class="flower_petal flower_petal-5"></div>
+                <div class="flower_petal flower_petal-6"></div>
+                <div class="flower_petal flower_petal-7"></div>
+                <div class="flower_petal flower_petal-8"></div>
+                <div class="flower_petal flower_petal-9"></div>
+                <div class="flower_petal flower_petal-10"></div>
+                <div class="flower_petal flower_petal-11"></div>
+                <div class="flower_petal flower_petal-12"></div>
+                <div class="flower_leaf flower_leaf-1"></div>
+                <div class="flower_leaf flower_leaf-2"></div>
+            </div>
+        </div>
+    </div>
+    
+
+    <a href="index.html" class="back-button">VOLVER ATRAS ❤️</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.js"></script>
+    <script>
+        function PlayAudio(){
+            const audio = document.getElementById("musica1");
+            audio.volume = 0.5; // Reduce volume slightly
+            audio.play(); 
+        }
+
+        function showHeartMessage() {
+            Swal.fire({
+                title: '¡FELIZ CUMPLEAÑOS CELINA!',
+                text: 'Sabes?, cada dia te ves mas hermosa, ten exitos en tu vida, eres increíble, no te rindas',
+                confirmButtonText: '❤️ Gracias',
+                background: 'rgba(0,0,0,0.8)',
+                color: '#FFD700'
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', PlayAudio);
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amor en el Universo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        .rose-border {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .rose-border:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        .astro-quote {
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center px-4 py-8">
+    <div id="stars-container" class="fixed inset-0 z-0"></div>
+    
+    <div class="relative z-10 max-w-4xl w-full bg-white bg-opacity-10 rounded-2xl shadow-2xl p-8 text-center">
+        <div class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-pulse">Para tí Celina 💖</h1>
+            <p class="text-xl text-gray-200">Chica amante de la Luna y los atardeceres. </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="space-y-4">
+                <p class="astro-quote text-lg">"La luna es tan bella de noche, pero ver a la luna y al atardecer juntas, es mucho mas hermosa, pero: ¿sabes quien es mas hermosa?, eres tú"</p>
+                <div class="rose-border rounded-lg overflow-hidden">
+                    <img src="luna.jpg" alt="Nebulosa" class="w-full h-64 object-cover">
+                </div>
+            </div>
+            <div class="space-y-4">
+                <p class="astro-quote text-lg">"Eres como la luna, misteriosa y luminosa, capaz de iluminar las noches más oscuras con solo tú presencia"</p>
+                <div class="rose-border rounded-lg overflow-hidden">
+                    <img src="lunas.jpg" alt="Galaxia" class="w-full h-64 object-cover">
+                </div>
+            </div>
+            <div class="space-y-4">
+                <p class="astro-quote text-lg">"Eres como el atardecer, un instante mágico donde los colores del cielo se mezclan con la belleza de tu alma"</p>
+                <div class="rose-border rounded-lg overflow-hidden">
+                    <img src="atardecer.jpg" alt="Universo" class="w-full h-64 object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Rest of the previous content remains the same -->
+        <div class="bg-white bg-opacity-20 rounded-lg p-6 mb-8">
+            <h2 class="text-3xl font-semibold mb-4">Un Mensaje Especial 💌</h2>
+            <p class="text-xl mb-4">Cada vez que te veo(...), sonrie siempre, porque tu sonrisa es la mas hermosa</p>
+            
+            <button id="showMoreBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                Mostrar Mensaje Secreto
+            </button>
+
+            <div id="secretMessage" class="hidden mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded" role="alert">
+                <p class="font-bold">🌹 Mensaje Especial 🌹</p>
+                <p>FELIZ CUMPLEAÑOS CELINA, la vida es muy bonita y mereces todo lo bonito de la vida</p>
+                <small class="text-sm italic">Sonrie sin importar que problemas pasen. ❤️</small>
+            </div>
+        </div>
+
+        <a href="index.html" class="inline-block bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+            Volver Atrás ↩️
+        </a>
+    </div>
+
+    <!-- Previous JavaScript remains the same -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const starsContainer = document.getElementById('stars-container');
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            const secretMessage = document.getElementById('secretMessage');
+
+            // Create stars
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                starsContainer.appendChild(star);
+            }
+
+            // Show secret message
+            showMoreBtn.addEventListener('click', () => {
+                secretMessage.classList.toggle('hidden');
+                showMoreBtn.textContent = secretMessage.classList.contains('hidden') 
+                    ? 'Mostrar Mensaje Secreto' 
+                    : 'Ocultar Mensaje';
+            });
+        });
+    </script>
+</body>
+</html>
